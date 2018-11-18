@@ -1,37 +1,14 @@
-import https from 'https';
+import express from 'express';
+import ejs from 'ejs';
+import path from 'path';
 
-import { hostname, account } from './util/constants';
+var app = express();
+app.use(express.static('static'));
+app.set('views', path.join(__dirname, '/views'));
+app.set('view engine', 'ejs');
+app.engine('html', ejs.renderFile);
 
-const options = {
-    hostname: hostname,
-    path: '/',
-    method: 'GET'
-};
-
-let req = https.request(options, (res) => {
-    console.log('statusCode:', res.statusCode);
-    console.log('headers:', res.headers);
-
-    res.on('data', (d) => {
-        console.log(d);
-    });
-
-    if (res.statusCode === 302) {
-        https.request(res.headers.location, (res) => {
-            console.log('statusCode:', res.statusCode);
-            console.log('headers:', res.headers);
-            res.setEncoding('utf-8');
-            res.on('data', (d) => {
-                console.log(d);
-            });
-        }).on('error', (e) => {
-            console.error(e);
-        }).end();
-    }
+app.get("/", (req, res) => {
+    res.render("index.html");
 });
-
-req.on('error', (e) => {
-    console.error(e);
-});
-
-req.end();
+app.listen(8888);

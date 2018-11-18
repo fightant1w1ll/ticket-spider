@@ -12,6 +12,8 @@
   "author": "fightant1w1ll",
   "license": "MIT",
   "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
     "images": "^3.0.1"
   },
   "devDependencies": {
