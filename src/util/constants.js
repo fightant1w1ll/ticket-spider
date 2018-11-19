@@ -5,8 +5,8 @@ let account = {
     password: "nie809370568"
 }
 
-let requestUrl = {
+let kyfwUrl = {
     captchaImage: "/passport/captcha/captcha-image64?login_site=E&module=login&rand=sjrand&1542516640643&callback=jQuery191033323255941152774_1542516619551&_=1542516619553"
 }
 
-export { hostname, account, requestUrl };
+export { hostname, account, kyfwUrl };

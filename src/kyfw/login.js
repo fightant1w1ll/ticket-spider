@@ -8,7 +8,9 @@ const getOptions = {
     hostname: util.hostname,
     method: 'GET'
 };
-getOptions.path = util.requestUrl.captchaImage;
+
+getOptions.path = util.kyfwUrl.captchaImage;
+
 let req = https.request(getOptions, (res) => {
     console.log('statusCode:', res.statusCode);
     console.log('headers:', res.headers);
