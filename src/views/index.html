@@ -5,57 +5,66 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>wspider</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <!-- 引入Element样式 -->
-        <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> -->
+        <link rel="stylesheet"
+            href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <!-- vue.js开发环境版本 -->
-        <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
+        <!-- vue-resource插件 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
         <!-- vue.js生产环境版本，优化了尺寸和速度 -->
         <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
         <!-- 引入Element组件库 -->
-        <!-- <script src="https://unpkg.com/element-ui/lib/index.js" defer></script> -->
+        <script src="https://unpkg.com/element-ui/lib/index.js" defer></script>
         <script src="//code.jquery.com/jquery-3.3.1.min.js" defer></script>
         <script src="js/main.js" defer></script>
     </head>
     <body>
-        <!-- <div id="app">
-            <el-button @click="visible= true">Button</el-button>
-            <el-dialog :visible.sync="visible" title="Hello world">
-                <p>Try Element</p>
-            </el-dialog>
+        <div id="app">
+            <el-form :label-position="labelPosition" ref="userInfo" :model="userInfo" >
+                <el-form-item label="账号">
+                    <el-input v-model="userInfo.username"
+                        placeholder="请输入账号" clearable></el-input>
+                </el-form-item>
+                <el-form-item label="密码">
+                    <el-input v-model="userInfo.password"
+                        placeholder="请输入密码" clearable></el-input>
+                </el-form-item>
+                <el-form-item label="登录验证图片">
+                <img :src="captchaSrc"/>
+                <el-button @click="getCaptcha">获取验证图片</el-button>
+                <el-input type="hidden" name="userInfo.answer"></el-input>
+            </el-form-item>
+                <el-form-item label="出发日期">
+                    <el-date-picker
+                        v-model="userInfo.startDate"
+                        type="date"
+                        placeholder="选择日期">
+                    </el-date-picker>
+                </el-form-item>
+                <el-form-item label="出发站">
+                    <el-input type="text" name="userInfo.startPlace"></el-input>
+                </el-form-item>
+                <el-form-item label="终点站">
+                    <el-input type="text" name="userInfo.arrivePlace"></el-input>
+                </el-form-item>
+                <el-form-item label="优先座位类别">
+                    <el-select v-model="userInfo.seatType" clearable
+                        placeholder="请选择优先座位类别">
+                        <el-option
+                            v-for="item in seatTypeOptions"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item>
+                    <el-button @click="submit">提交</el-button>
+                </el-form-item>
+            </el-form>
+        </div>
 
-            <el-input v-model="input" placeholder="请输入账号"></el-input>
-            <el-input v-model="input" placeholder="请输入密码"></el-input>
-        </div> -->
-        <img id="captchaImage"/><input id="captchaBtn" type="button" value="获取验证图片"/><br/>
-        <form action="/submit" method="POST">
-            <input type="hidden" name="answer"/><br/>
-            账号：
-            <input type="text" name="username"/><br/>
-            密码：
-            <input type="password" name="passwotd"/><br/>
-            出发日期：
-            <input type="date" name="startDate"/><br/>
-            出发站：
-            <input type="text" name="startPlace"/><br/>
-            终点站：
-            <input type="text" name="arrivePlace"/><br/>
-            优先座位类别：
-            <select name="seatType">
-                <option value="0">商务座/特等座</option>
-                <option value="1">一等座</option>
-                <option value="2">二等座</option>
-                <option value="3">高级软卧</option>
-                <option value="4">软卧</option>
-                <option value="5">动卧</option>
-                <option value="6">硬卧</option>
-                <option value="7">软座</option>
-                <option value="8">硬座</option>
-                <option value="9">无座</option>
-            </select>
-            <br/>
-            <input type="submit" vlaue="提交" />
-        </form>
     </body>
 </html>
